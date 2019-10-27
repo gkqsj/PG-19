@@ -7,7 +7,8 @@
 
 int aaa = 0;
 
-bool insideoutsidetest(Triangle triangle, vec3 &P){
+bool insideoutsidetest(Triangle triangle, vec3 &P)
+{
     
     vec3 p1 = triangle.vertex[0].pos;
     vec3 p2 = triangle.vertex[1].pos;
@@ -36,8 +37,8 @@ int main(int argc, char* argv[])
 		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 		if (window && renderer) {
-			vec3 Pos = vec3 (0,0,2);
-			vec3 At = vec3 (0,0,0);
+			vec3 Pos = vec3 (0,0,5);
+			vec3 At = vec3 (0,0,-1);
 			SDL_bool done = SDL_FALSE;
 			SDL_SetRelativeMouseMode(SDL_FALSE);
 
@@ -47,7 +48,7 @@ int main(int argc, char* argv[])
 			ImGui::CreateContext();
 			ImGuiSDL::Initialize(renderer, WIDTH, HEIGHT);
 
-			camera cam(Pos, vec3(0, 0, -1), vec3(0, 1, 0), 90.0f, 1.f, WIDTH, HEIGHT, 1000);
+			camera cam(Pos, At, vec3(0, 1, 0), 90.0f, 1.f, WIDTH, HEIGHT, 1000);
 
 			float my_color[4];
 			bool my_tool_active;
@@ -110,9 +111,9 @@ int main(int argc, char* argv[])
 						if (event.key.keysym.sym == SDLK_a) {
 
 							matrix44(			
-							cos(5.0 * 3.14159265/ 180.0), 0, sin(5.0 * 3.14159265/ 180.0)*(-1) , 0.0,
+							cos(1.0 * 3.14159265/ 180.0), 0, sin(1.0 * 3.14159265/ 180.0)*(-1) , 0.0,
 							0, 1, 0, 0.0,
-							sin(5.0 * 3.14159265/ 180.0), 0, cos(5.0 * 3.14159265/ 180.0), 0.0,
+							sin(1.0 * 3.14159265/ 180.0), 0, cos(1.0 * 3.14159265/ 180.0), 0.0,
 							0, 0, 0, 1.0
 							).mult_vec_matrix(Pos, Pos);
 
@@ -141,9 +142,9 @@ int main(int argc, char* argv[])
 						if (event.key.keysym.sym == SDLK_d) {
 
 							matrix44(			
-							cos(5.0 * 3.14159265/ 180.0), 0, sin(5.0 * 3.14159265/ 180.0) , 0.0,
+							cos(1.0 * 3.14159265/ 180.0), 0, sin(1.0 * 3.14159265/ 180.0) , 0.0,
 							0, 1, 0, 0.0,
-							sin(5.0 * 3.14159265/ 180.0)*(-1), 0, cos(5.0 * 3.14159265/ 180.0), 0.0,
+							sin(1.0 * 3.14159265/ 180.0)*(-1), 0, cos(1.0 * 3.14159265/ 180.0), 0.0,
 							0, 0, 0, 1.0
 							).mult_vec_matrix(Pos, Pos);
 
@@ -212,6 +213,7 @@ int main(int argc, char* argv[])
 									{
 										aaa++;
 										printf("clicou %d\n",aaa);
+
 									}
 								}
 							
